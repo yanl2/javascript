@@ -9,7 +9,7 @@ var plan = ["############################",
             "#   ##       o             #",
             "# o  #         o       ### #",
             "#    #                     #",
-            "############################"];
+            "############################"]; 
 
 function Vector(x, y) {
   this.x = x;
@@ -335,3 +335,5 @@ for(var i=0;i<10;i++){
 	console.log(valley.toString());
 	valley.turn();
 }
+
+//push test 1
