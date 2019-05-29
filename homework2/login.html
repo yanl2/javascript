@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <style>  
+
+                body{  
+                
+                margin-left:auto;  
+                
+                margin-right:auto; 
+                
+                margin-TOP:100PX; 
+                
+                width:20em;  
+                
+                }
+                
+                </style>
+    </head>
+    <body>
+      <form action="index.html" method="GET">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">@</span>
+          <input id="userName" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1" onchange="checkpwd()">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">@</span>
+          <input id="passWord" type="text" class="form-control" placeholder="密码" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <button id="btn" type="submit" style="width:280px;" class="btn btn-default">登 录</button>
+      </form>
+    </body>
+
+    <script>
+      var users=JSON.parse(localStorage.getItem("Test"))||{"TestName":{"pwd":"","isAuto":false}};
+      function checkpwd(){
+          var pwd=document.getElementById("passWord");
+          var username=document.getElementById("userName");
+          if(users.hasOwnProperty(username.value)&&users[username.value].isAuto===true){
+            pwd.value=users[username.value].pwd;
+            document.location = 'index.html?userName='+username.value;
+          }
+      };
+      var btn=document.getElementById("btn");
+      btn.addEventListener("click",function(event){
+          var userName=document.getElementById("userName");
+          var pwd1=document.getElementById("passWord");
+          if(pwd1.value===""||userName.value===""){
+            event.preventDefault();
+            alert("用户名或密码不能为空!");
+          }else if(users[userName.value].pwd!=pwd1.value){
+            event.preventDefault();
+            alert("密码错误！请重新输入");
+          }
+      });
+      
+  </script>
+
+</html>

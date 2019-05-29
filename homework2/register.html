@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <title>register</title>
+        <style>  
+
+                body{  
+                
+                margin-left:auto;  
+                
+                margin-right:auto; 
+                
+                margin-TOP:100PX; 
+                
+                width:20em;  
+                
+                }
+                
+                </style>
+    </head>
+    <body>
+        <form action="login.html">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">@</span>  
+                    <input id="userName" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1">  
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">@</span>
+                <input id="passWord1" type="text" class="form-control" placeholder="密码" aria-describedby="basic-addon1"> 
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">@</span>
+                <input id="passWord2" type="text" class="form-control" placeholder="确认密码" aria-describedby="basic-addon1"> 
+            </div>
+            <br>
+            <p><input id="isAuto" type="checkbox" />自动登录</p>
+            <button  id="btn" type="submit" style="width:280px;" class="btn btn-default">注 册</button>
+        </form>
+        <script>
+            var users=JSON.parse(localStorage.getItem("Test"))||{"TestName":{"password":"","isAuto":false}};
+            var btn=document.getElementById("btn");
+            btn.addEventListener("click",function(event){
+                var userName=document.getElementById("userName");
+                var pwd1=document.getElementById("passWord1");
+                var pwd2=document.getElementById("passWord2");
+                var sign=document.getElementById("isAuto");
+
+                if(pwd1.value!=pwd2.value){
+                     event.preventDefault();
+                     alert("密码不同，请重新输入!");
+                }else if(userName.value===""||pwd1.value===""||pwd2.value===""){
+                    event.preventDefault();
+                    alert("用户名或密码不能为空!");
+                }else if(users.hasOwnProperty(userName.value)){
+                    event.preventDefault();
+                    alert("用户名已存在，请重新输入!");
+                }else{
+                    users[userName.value]={"pwd":pwd1.value,"isAuto":sign.checked};
+                    localStorage.setItem("Test",JSON.stringify(users));
+                    alert("注册成功！");
+                    
+                }
+            });
+            
+        </script>
+    </body>
+
+</html>
